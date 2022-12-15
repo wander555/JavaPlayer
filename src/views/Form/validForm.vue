@@ -225,7 +225,7 @@ export default {
 <style>
 body {
   height: 100% !important;
-  background-color: #f7f8fa !important;
+  background-color: #eff2f5 !important;
 }
 
 #app {

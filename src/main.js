@@ -16,6 +16,10 @@ import {
   NavBar,
   Area,
   PullRefresh,
+  Image as VanImage,
+  Space,
+  Tag,
+  Lazyload,
 } from "vant";
 import App from "./App.vue";
 import router from "./router";
@@ -45,4 +49,8 @@ createApp(App)
   .use(NavBar)
   .use(Area)
   .use(PullRefresh)
+  .use(Space)
+  .use(VanImage)
+  .use(Tag)
+  .use(Lazyload)
   .mount("#app");
