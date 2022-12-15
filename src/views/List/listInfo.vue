@@ -18,9 +18,13 @@
               height="100"
               fit="cover"
               position="center"
-              src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+              :src="item.posterUrl"
             >
             </van-image>
+
+            <div>
+              {{ item.number }}
+            </div>
           </div>
         </van-space>
       </van-list>
@@ -29,6 +33,7 @@
 </template>
 <script>
 import { ref } from "vue";
+import request from "../../utils/request";
 
 export default {
   setup() {
@@ -39,16 +44,33 @@ export default {
 
     const onLoad = () => {
       console.log("onLoad");
+
       setTimeout(() => {
         if (refreshing.value) {
           list.value = [];
           refreshing.value = false;
         }
 
+        request({
+          url: "/7mm/get7mmPage/1",
+          method: "get",
+        }).then((res) => {
+          console.log(res);
+
+          res.data.forEach((element) => {
+            list.value.push(element);
+          });
+
+          // for (let i = 0; i < 10; i++) {
+          //   list.value.push(list.value.length + 1);
+          // }
+        });
+
         //获取数据
-        for (let i = 0; i < 10; i++) {
-          list.value.push(list.value.length + 1);
-        }
+        //TODO
+        // for (let i = 0; i < 10; i++) {
+        //   list.value.push(list.value.length + 1);
+        // }
 
         //结束loading
         loading.value = false;
