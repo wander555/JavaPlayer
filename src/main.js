@@ -20,11 +20,17 @@ import {
   Space,
   Tag,
   Lazyload,
+  ImagePreview,
 } from "vant";
 import App from "./App.vue";
 import router from "./router";
 import { createPinia } from "pinia";
 import "./utils/rem";
+
+//vue-video-player
+import VideoPlayer from "vue-video-player";
+import "video.js/dist/video-js.css";
+// import "vue-video-player/src/custom-theme.css";
 
 const pinia = createPinia();
 
@@ -52,5 +58,7 @@ createApp(App)
   .use(Space)
   .use(VanImage)
   .use(Tag)
+  .use(ImagePreview)
   .use(Lazyload)
+  .use(VideoPlayer)
   .mount("#app");

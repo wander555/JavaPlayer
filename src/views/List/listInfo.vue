@@ -18,12 +18,19 @@
               height="100"
               fit="cover"
               position="center"
-              :src="item.posterUrl"
+              :src="item"
+              @touchstart="handlerTouchstart"
+              @touchend="handlerTouchend"
             >
             </van-image>
 
+            <my-video
+              :sources="video.sources"
+              :options="video.options"
+            ></my-video>
+
             <div>
-              {{ item.number }}
+              <!-- {{ item.number }} -->
             </div>
           </div>
         </van-space>
@@ -34,6 +41,7 @@
 <script>
 import { ref } from "vue";
 import request from "../../utils/request";
+import myVideo from "./video.vue";
 
 export default {
   setup() {
@@ -51,26 +59,29 @@ export default {
           refreshing.value = false;
         }
 
-        request({
-          url: "/7mm/get7mmPage/1",
-          method: "get",
-        }).then((res) => {
-          console.log(res);
+        // request({
+        //   url: "/breeds/image/random",
+        //   method: "get",
+        // }).then((res) => {
+        //   console.log(res);
 
-          res.data.forEach((element) => {
-            list.value.push(element);
-          });
+        //   res.data.forEach((element) => {
+        //     list.value.push(element);
+        //   });
 
-          // for (let i = 0; i < 10; i++) {
-          //   list.value.push(list.value.length + 1);
-          // }
-        });
+        // });
 
         //获取数据
         //TODO
-        // for (let i = 0; i < 10; i++) {
-        //   list.value.push(list.value.length + 1);
-        // }
+        for (let i = 0; i < 10; i++) {
+          // request({
+          //   url: "/breeds/image/random",
+          //   method: "get",
+          // }).then((res) => {
+          //   list.value.push(res);
+          // });
+          list.value.push(i);
+        }
 
         //结束loading
         loading.value = false;
@@ -90,6 +101,19 @@ export default {
       loading.value = true;
       onLoad();
     };
+    const handlerTouchstart = () => {
+      console.log("handlerTouchstart");
+    };
+
+    //长按开始
+    const handlerTouchmove = () => {
+      console.log("handlerTouchmove");
+    };
+
+    //长按结束
+    const handlerTouchend = () => {
+      console.log("handlerTouchend");
+    };
 
     return {
       list,
@@ -98,6 +122,8 @@ export default {
       finished,
       onRefresh,
       refreshing,
+      handlerTouchstart,
+      handlerTouchend,
     };
   },
 };
